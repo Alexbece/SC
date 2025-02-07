@@ -1,4 +1,4 @@
-<div class="max-h-[500px] overflow-y-scroll w-full">
+<div class="w-full">
 
                         <div class="flex flex-col gap-8 ">
                             <div class="grid w-full gap-3 lg:flex">

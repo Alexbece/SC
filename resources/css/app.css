@@ -49,6 +49,12 @@ body:not(.blog_index):not(.pageKonsultasi):not(.konselorSignUp) {
     background-attachment: fixed;
 }
 
+@media (max-width: 768px) {
+    body {
+        padding: 2rem !important;
+    }
+}
+
 .blog_index {
     font-family: var(--default-font);
     padding: 1.5rem 6rem;
@@ -74,12 +80,6 @@ body:not(.blog_index):not(.pageKonsultasi):not(.konselorSignUp) {
     justify-content: center;
     font-family: var(--default-font);
     background-color: var(--biru-4)
-}
-
-@media (width <= 48rem) {
-    body {
-        padding: 1.5rem 2rem;
-    }
 }
 
 p,
@@ -295,4 +295,4 @@ h6 {
 .team-card {
     border-radius: 10px;
     background: linear-gradient(to top, black, var(--biru-6));
-}
+}   

@@ -1,21 +1,36 @@
 <?php
 
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('client.landing.home');
-})->name('home');
-Route::get('/home', function () {
-    return view('client.landing.landing');
-})->name('landing');
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Page Auth
 Route::get('/signup', function () {
     return view('client.auth.sign_up');
 })->name('signup');
+Route::post('/signup', [AuthController::class, 'register'])->name('signup.post');
+
+
 Route::get('/login', function () {
     return view('client.auth.login');
 })->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//delete account 
+
+Route::post('/delete-account', [AuthController::class, 'deleteAccount'])->name('delete.account');
 
 // Konselor Login
 
@@ -25,6 +40,11 @@ Route::get('/login-konselor', function () {
 Route::get('/signup-konselor', function () {
     return view('client.auth.konselor.konselorSignUp');
 })->name('konselorSignUp');
+
+
+Route::get('/profil-konselor', function () {
+    return view('client.konselor.profilKonselor');
+})->name('profilKonselor');
 
 
 // Page Konselor

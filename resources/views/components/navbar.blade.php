@@ -55,12 +55,24 @@
 
         <div class="absolute top-[75px] w-max bg-white rounded-xl hidden shadow-2xl z-10" id="profileMenu">
             <div class="flex items-center flex-1 gap-2 p-3 border-b-2">
+                <!-- Foto pengguna (opsional, bisa diganti dengan gambar profile) -->
                 <div class="w-12 h-12 rounded-full bg-biru-6"></div>
+            
+                @if (Auth::check())
                 <div class="flex-1 gap-1">
-                    <h3 class="text-base font-semibold">Farrel Yassar Kurniawan</h3>
-                    <p class="text-xs font-normal text-hitam-600">farrel26yassar@gmail.com</p>
+                    <h3 class="text-base font-semibold">{{ Auth::user()->nama_lengkap }}</h3> <!-- Nama lengkap pengguna -->
+                    <p class="text-xs font-normal text-hitam-600">{{ Auth::user()->email }}</p> <!-- Email pengguna -->
                 </div>
+                @else
+                <div class="flex items-center gap-2">
+                    <button class="px-5 py-2 font-semibold border-2 rounded-full text-biru-6 border-biru-6 h-[45px] w-max"><a
+                            href="{{route('login')}}">Masuk</a></button>
+                    <button class="px-5 py-2 font-semibold text-white rounded-full h-[45px] w-max bg-biru-6"><a
+                            href="{{route('signup')}}">Daftar</a></button>
+                </div>
+                @endif
             </div>
+            
             <div class="grid w-full gap-4 p-3 border-b-2">
                 <div class="flex items-center gap-1 text-sm transition-all hover:text-biru-6 w-max text-hitam-600">
                     <i class='text-xl bx bx-user'></i><a href="{{route('profil')}}">Lihat akun</a>
@@ -72,9 +84,14 @@
                     <i class='text-xl bx bx-history'></i><a href="">Riwayat</a>
                 </div>
             </div>
-            <div class="flex items-center gap-1 p-3 text-sm transition-all hover:text-biru-6 w-max text-hitam-600">
-                <i class='text-xl bx bx-log-out'></i><a href="{{route ('login')}}">Keluar</a>
-            </div>
+            <form action="{{ route('logout') }}" method="POST" class="flex items-center gap-1 p-3 text-sm transition-all hover:text-biru-6 w-max text-hitam-600">
+                @csrf
+                <button type="submit" class="flex items-center gap-1">
+                    <i class="text-xl bx bx-log-out"></i>
+                    Keluar
+                </button>
+            </form>
+            
         </div>
     </div>
 </div>

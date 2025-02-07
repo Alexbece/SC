@@ -6,8 +6,13 @@
 <body>
     <header class="rounded-[30px] bg-white h-max flex flex-col items-center pb-40 w-full mb-[273px]">
         <nav class="relative flex items-center justify-between px-8 py-4 rounded-[20px] w-full">
-            @include ('components.navbarGuest')
+            @auth
+                @include('components.navbar')  <!-- Navbar untuk pengguna yang sudah login -->
+            @else
+                @include('components.navbarGuest')  <!-- Navbar untuk pengguna yang belum login -->
+            @endauth
         </nav>
+        
         <div class="flex flex-col items-center justify-center gap-4 h-[611px]">
             <p class="px-4 text-xl text-center rounded-full ring-2 ring-hitam-400 w-max">Sini Sehat, <span
                     class=" text-biru-6">Sini Cerita</span>.</p>

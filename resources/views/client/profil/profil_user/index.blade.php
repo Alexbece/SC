@@ -45,7 +45,7 @@
         id="editModal">
         <div class="flex flex-col items-center justify-center gap-4 p-4 bg-white rounded-lg h-max w-max">
             <div class="grid mb-2 text-center place-items-center">
-                <img src="{{asset('client/img/foto_dokter/foto_doctor_1.jpg')}}" alt=""
+                <img src="{{ asset('client/img/foto_dokter/foto_doctor_1.jpg') }}" alt=""
                     class="object-cover object-top w-20 h-20 mb-4 border-2 rounded-full shadow-lg border-biru-6">
                 <h4 class="text-2xl font-bold text-hitam-800">Farrel Yassar Kurniawan</h4>
                 <p class="text-sm font-light text-hitam-600">farrel26yassar@gmail.com</p>
@@ -74,7 +74,7 @@
             <div class="flex w-full gap-4 px-3 border-b-2 border-hitam-100">
                 <h2 class="min-w-[70px] mr-3 font-semibold text-hitam-800">Foto Profil</h2>
                 <div class="flex gap-2">
-                    <img src="{{asset('client/img/foto_dokter/foto_doctor_1.jpg')}}" alt=""
+                    <img src="{{ asset('client/img/foto_dokter/foto_doctor_1.jpg') }}" alt=""
                         class="object-cover object-top mb-4 border-2 rounded-full shadow-lg w-14 h-14 border-biru-6">
                     <button
                         class="p-2 text-sm border-2 rounded-lg text-hitam-900 border-hitam-100 h-max w-max hover:bg-hitam-100 hover:border-hitam-100">Upload
@@ -101,8 +101,11 @@
                 <button
                     class="px-4 py-2 text-lg font-semibold text-white transition-all duration-200 rounded-full bg-biru-6 hover:bg-biru-5"
                     id="batalButton">Batal</button>
-                <button
-                    class="px-4 py-2 text-lg font-semibold transition-all duration-200 rounded-full text-biru-6 bg-hitam-50 hover:bg-hitam-100">Keluar</button>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button
+                        class="px-4 py-2 text-lg font-semibold transition-all duration-200 rounded-full text-biru-6 bg-hitam-50 hover:bg-hitam-100">Keluar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -120,9 +123,14 @@
                 <button
                     class="px-4 py-2 text-lg font-semibold text-white transition-all duration-200 rounded-full bg-biru-6 hover:bg-biru-5"
                     id="bataldeleteButton">Batal</button>
-                <button
-                    class="px-4 py-2 text-lg font-semibold text-red-500 transition-all duration-200 rounded-full bg-hitam-50 hover:bg-hitam-100">Hapus
-                    Akun</button>
+                    <form action="{{ route('delete.account') }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                                class="px-4 py-2 text-lg font-semibold text-red-500 transition-all duration-200 rounded-full bg-hitam-50 hover:bg-hitam-100">
+                            Hapus Akun
+                        </button>
+                    </form>
+                    
             </div>
         </div>
     </div>
@@ -134,7 +142,6 @@
     </div>
 
     <script>
-
         // Sign Out Modal
         document.addEventListener('DOMContentLoaded', () => {
             const deleteaccountButton = document.getElementById('deleteaccountButton');
@@ -186,16 +193,16 @@
 
 
         // Profil Konten
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             setActiveButton('identitasButton'); // Set tombol Profil Saya aktif saat halaman pertama kali dimuat
-            loadContent('/profil/identitas');   // Memuat profil identitas
+            loadContent('/profil/identitas'); // Memuat profil identitas
         });
-        document.getElementById('identitasButton').addEventListener('click', function (e) {
+        document.getElementById('identitasButton').addEventListener('click', function(e) {
             e.preventDefault();
             setActiveButton('identitasButton'); // Set tombol aktif
             loadContent('/profil/identitas');
         });
-        document.getElementById('riwayatButton').addEventListener('click', function (e) {
+        document.getElementById('riwayatButton').addEventListener('click', function(e) {
             e.preventDefault();
             setActiveButton('riwayatButton'); // Set tombol aktif
             loadContent('/profil/riwayat');
